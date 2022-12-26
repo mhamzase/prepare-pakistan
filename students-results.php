@@ -12,7 +12,7 @@ if (isset($_SESSION['loggedIn'])) {
     $user_data = mysqli_fetch_assoc($user_result);
     $db_type = $user_data['type'];
 
-    if ($db_type == 0) {
+    if ($db_type == 0 || $db_type == 2) {    // admin or teacher/sub admin
 
 ?>
         <!DOCTYPE html>

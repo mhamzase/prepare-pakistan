@@ -33,7 +33,7 @@ if (isset($_SESSION['loggedIn'])) {
     $user_data = mysqli_fetch_assoc($user_result);
     $db_type = $user_data['type'];
 
-    if ($db_type == 0) {
+    if ($db_type == 0 || $db_type == 2) {
 
 ?>
         <!DOCTYPE html>
@@ -76,8 +76,14 @@ if (isset($_SESSION['loggedIn'])) {
                             <th scope="col">Email</th>
                             <th scope="col">View details</th>
                             <th scope="col">Role</th>
-                            <th scope="col">Assign Role</th>
-                            <th scope="col">Action</th>
+                            <?php
+                            if ($db_type == 0) {
+                            ?>
+                                <th scope="col">Assign Role</th>
+                                <th scope="col">Action</th>
+                            <?php
+                            }
+                            ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -100,9 +106,11 @@ if (isset($_SESSION['loggedIn'])) {
                                         echo "User";
                                     } else {
                                         echo "Sub Admin";
-                                    } ?></td>
-                                <td>
-                                    <?php if ($row['type'] == 1) { ?>
+                                    } ?>
+                                </td>
+
+                                <?php if ($db_type == 0) { ?>
+                                    <td>
                                         <form action="" method="post">
                                             <input type="hidden" name="user_id" value="<?php echo $row['id'] ?>">
                                             <div class="row">
@@ -118,20 +126,18 @@ if (isset($_SESSION['loggedIn'])) {
 
                                             </div>
                                         </form>
-                                    <?php
-                                    } else {
-                                        echo "";
-                                    }
-                                    ?>
-                                </td>
-                                <td>
-                                    <form action="" method="post" onsubmit="return confirmAlert()">
-                                    <input type="hidden" name="user_id" value="<?php echo $row['id'] ?>">
+                                    </td>
 
-                                        <button class="btn btn-danger" name="delete-user">Delete</button>
-                                    </form>
-                                </td>
+                                    <td>
+                                        <form action="" method="post" onsubmit="return confirmAlert()">
+                                            <input type="hidden" name="user_id" value="<?php echo $row['id'] ?>">
 
+                                            <button class="btn btn-danger" name="delete-user">Delete</button>
+                                        </form>
+                                    </td>
+                                <?php
+                                }
+                                ?>
                             </tr>
                         <?php
                         }
@@ -181,14 +187,14 @@ if (isset($_SESSION['loggedIn'])) {
 
 
             <script>
-            // delete confirm function
-            function confirmAlert(){
-                if(window.confirm("Are you sure?")){
-                    return true;
-                }else{
-                    return false;
+                // delete confirm function
+                function confirmAlert() {
+                    if (window.confirm("Are you sure?")) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 }
-            }
                 // fetching user details
                 function fetchUserDetails() {
 

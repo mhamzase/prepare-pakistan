@@ -51,14 +51,7 @@ if (isset($_SESSION['loggedIn'])) {
                 <a href="add-chapters.php"><button type="button" class="btn btn-outline-primary btn-lg "><i class="bi bi-journal-bookmark-fill m-3"></i>Add Chapters</button></a>
                 <a href="add-quizes.php"><button type="button" class="btn btn-outline-warning btn-lg "><i class="bi bi-card-list m-3"></i>Add Quiz's</button></a>
                 <a href="students-results.php"><button type="button" class="btn btn-outline-light btn-lg "><i class="bi bi-card-list m-3"></i>Students Results</button></a>
-                <?php
-                if ($db_type == 0) {
-                ?>
-                    <a href="users-list.php"><button type="button" class="btn btn-outline-light btn-lg "><i class="bi bi-person-lines-fill m-3"></i> Users</button></a>
-
-                <?php
-                }
-                ?>
+                <a href="users-list.php"><button type="button" class="btn btn-outline-light btn-lg "><i class="bi bi-person-lines-fill m-3"></i> Users</button></a>
             </div>
             <div class="w-100 row d-flex justify-content-center px-5">
                 <img src="images/edu2.png" alt="" class="col-md-4">
